@@ -1,33 +1,56 @@
-#! /usr/bin/bash
+#! /bin/bash
 
-SERVICES=( #esto es un arreglo
-    frutas
-    cafe
-    papas
-    desayunos
+SERVICES=(
+	frutas
+	cafe
+	papas
+	desayunos
 )
 
-CODE=1  #Codigo de seleccion del arreglo
+CODE=1
 
-echo "Estos son los servicios que tengo para ti: "
+echo "estos son los servicios que tengo disponibles para ti."
+for v in "${SERVICES[@]}"
+do
+	echo "${CODE}- ${v}"
+	CODE=$(expr $CODE + 1)
 
-for v in "${SERVICES[@]}" #Recorriendo el arreglo
-    do
-        echo "${CODE}- ${v}"  # Capturo el numero de arreglo y le agrego a la posicion del arreglo 
-        CODE=$(expr $CODE + 1) # convierto la posicion en numero
+done
 
-    done
+frutas() {
+	FRUTAS=(
+		manzana
+		pera
+		mandarina
+	)
+	echo "estas son las frutas que tenemos disponibles"
+	CODE_FRUTAS=0
+	for v in "${FRUTAS[@]}"
+	do
+		echo "${CODE_FRUTAS}-${v}"
+		CODE_FRUTAS=$(expr $CODE_FRUTAS + 1)
+	done
+	read -p "Cual fruta tu quieres ordernar ? " FRUTAS_USER_ORDER
+	echo "aqui esta tu !!!!! ${FRUTAS[$FRUTAS_USER_ORDER]}!!!!!!!, QUE LA DISFRUTES !!!!!" 
+}
 
-read -p "Cual servicio desea tener? : " CLIENT_SERVICES  #Con el -p se puede pregutar, remplaza el echo, Asigno el dato a la variable
+cafe() {
+	echo "estoy en el contexto del cafe"
+}
 
-echo $CLIENT_SERVICES
+papas() {
+	echo "estoy en el contexto de las papas"
+}
 
+desayunos() {
+	echo "estoy en el contexto de el desayuno"
+}
+
+read -p "cual servicio tu deseas tener ? : " CLIENT_SERVICES
 case $CLIENT_SERVICES in
-
-    1) echo "${SERVICES[$(expr $CLIENT_SERVICES - 1)]}";;
-    2) echo "${SERVICES[$(expr $CLIENT_SERVICES - 1)]}";;
-    3) echo "${SERVICES[$(expr $CLIENT_SERVICES - 1)]}";;
-    4) echo "${SERVICES[$(expr $CLIENT_SERVICES - 1)]}";;
-    *) echo "Este servicio no esta disponible";;
-
+1) frutas;;
+2) cafe;; 
+3) papas;;
+4) desayunos;;
+*) echo "Este servicio no esta disponible!";; 
 esac

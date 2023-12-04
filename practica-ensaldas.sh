@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/bash
 
 SERVICES=(
 	frutas
@@ -27,7 +27,7 @@ frutas() {
 	CODE_FRUTAS=0
 	for v in "${FRUTAS[@]}"
 	do
-		echo "${CODE_FRUTAS}-${v}"
+		echo "${CODE_FRUTAS}- ${v}"
 		CODE_FRUTAS=$(expr $CODE_FRUTAS + 1)
 	done
 	read -p "Cual fruta tu quieres ordernar ? " FRUTAS_USER_ORDER
@@ -35,15 +35,62 @@ frutas() {
 }
 
 cafe() {
-	echo "estoy en el contexto del cafe"
+	CAFE=(
+		Tinto
+		Capuchino
+		Expreso
+		Pintado
+	)
+
+	echo "Estas son las bebidas calientes disponibles: "
+	CODE_CAFE=0
+	for v in "${CAFE[@]}"
+	do
+		echo "${CODE_CAFE}- ${v}"
+		CODE_CAFE=$(expr $CODE_CAFE + 1)
+	done
+
+	read -p " Cual es la bebida caliente que desea ordenar?: \n \t" CAFE_ORDER_USER
+	echo "Aqui esta tu  ${CAFE[$CAFE_ORDER_USER]} !!!, Que lo disfrute !!!!!!"
 }
 
 papas() {
-	echo "estoy en el contexto de las papas"
+	PAPA=(
+		Pure
+		Francesa
+		Estralladas
+		Maya
+	)
+
+	echo "Estas son las comidas iniciales que disponemos: "
+	CODE_PAPA=0
+	for v in "${PAPA[@]}"
+	do
+		echo "${CODE_PAPA}- ${v}"
+		CODE_PAPA=$(expr $CODE_PAPA + 1)
+	done
+
+	read -p "Cual es tu seleccion para el inicio, que va a ordenar?: \n \t" PAPA_ORDER_USER
+	echo "Aqui esta su seleccion de ${PAPA[$PAPA_ORDER_USER]} !!!, Que lo disfrute !!!"
 }
 
 desayunos() {
-	echo "estoy en el contexto de el desayuno"
+	DESAYUNO=(
+		Caldo
+		Changua
+		Huevos
+	)
+
+	echo "Estos son los desayuno para hoy!!! "
+	CODE_DESAYUNO=0
+	for v in ${DESAYUNO[@]}
+	do
+		echo "${CODE_DESAYUNO}- ${v}"
+		CODE_DESAYUNO=$(expr $CODE_DESAYUNO + 1)
+	done
+
+	read -p "Cual es la seleccion para el desayuno que desea ordenar?: \n \t" DESAYUNO_ORDER_USER
+	echo "Aqui esta su orden de ${DESAYUNO[DESAYUNO_ORDER_USER]} !!!!, Que lo disfrutes !!!"
 }
 
 read -p "cual servicio tu deseas tener ? : " CLIENT_SERVICES
